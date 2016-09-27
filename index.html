@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="sliderDemoApp">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <link href="css/style.css" rel="stylesheet">
+  <body ng-controller="sliderDemoCtrl">
+    <button id="fullscreen_mode">Full Screen</button>
+    <div id="sunburst"></div>
+    <div id="heading_display_options">
+
+      <div id="header">
+        <span>heading_dispaly_options</span>
+        <div id="arrow" class="arrow-up"></div>
+      </div>
+
+      <div id="main_options">
+
+        <div class="sliderExample Entities">
+            <span style="font-size:20px;">Entities:</span>
+            <div class="entities_div">
+              <input type="checkbox" id="LabelVisionCheckBox" checked/>  
+              <span>Label_Vision</span>
+              <div class="right_div">
+                <input type="number" min="0" max="100" id="LabelVisionValue" ng-change="LabelVisionChange()" ng-model="a_LabelVisionValue.val" />
+                <span>%</span>
+              </div>
+            </div>
+            <div class="entities_div">
+              <input type="checkbox" id="PerspectiveCheckBox" checked/>  
+              <span>Perspective</span>
+              <div class="right_div">
+                <input type="number" min="0" max="100" id="PerspectiveValue" ng-change="PerspectiveChange()" ng-model="a_PerspectiveValue.val" />
+                <span>%</span>
+              </div>
+            </div>
+            <div class="entities_div">
+              <input type="checkbox" id="ObjectivesCheckBox" checked/>  
+              <span>Objectives</span>
+              <div class="right_div">
+                <input type="number" min="0" max="100" id="ObjectivesValue" ng-change="ObjectivesChange()" ng-model="a_ObjectivesValue.val" />
+                <span>%</span>
+              </div>
+            </div>
+            <div class="entities_div">
+              <input type="checkbox" id="BenefitsCheckBox" checked/>  
+              <span>Benefits</span>
+              <div class="right_div">
+                <input type="number" min="0" max="100" id="BenefitsValue" ng-change="BenefitsChange()" ng-model="a_BenefitsValue.val" />
+                <span>%</span>
+              </div>
+            </div>
+            <div class="entities_div">
+              <input type="checkbox" id="EnablersCheckBox" checked/>  
+              <span>Enablers</span>
+              <div class="right_div">
+                <input type="number" min="0" max="100" id="EnablersValue" ng-change="EnablersChange()" ng-model="a_EnablersValue.val" />
+                <span>%</span>
+              </div>
+            </div>
+        </div>
+
+        <div class="sliderExample Display_Options">
+            <span style="font-size:20px;">Display Options:</span>
+            <div class="entities_div">
+              <input type="checkbox" ng-model="a_IDsCheckBox.val" />  
+              <span>IDs</span>
+            </div>
+            <div class="entities_div">
+              <input type="checkbox" ng-model="a_DescriptionCheckBox.val" />  
+              <span>Description</span>
+            </div>
+            <div class="entities_div">
+              <input type="checkbox" ng-model="a_InfoBoxCheckBox.val" />  
+              <span>Info Box</span>
+            </div>
+        </div>
+
+        <div class="sliderExample Display_Options">
+            <span style="font-size:20px;">Colour:</span>
+            <div class="entities_div">
+              <input type="radio" ng-model="a_ScorecardRadio.val" />
+              <span>Scorecard</span>
+            </div>
+            <div class="entities_div">
+              <input type="radio" ng-model="a_RAGRadio.val" />  
+              <span>RAG</span>
+            </div>
+        </div>
+
+      </div>
+
+  </body>
+  <script src="js/jquery-git2.min.js"></script>
+  <script src="js/draggable.js"></script>
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/d3plus.js"></script>
+  <script src="js/sunburst.js"></script>
+  <script type="text/javascript">
+
+    var heightOffset = 50;
+    var arrow_flag = 1;
+    var size;
+
+    var entity_values = [20,20,20,20,20];
+    var prev_entity_values = [20,20,20,20,20];
+    var entity_shows = [1,1,1,1,1];
+
+ 
+    function fullScreen(theURL) {
+      var element = document.getElementById("sunburst");
+      if(element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if(element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if(element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if(element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    }
+
+    function get_TotalValue(){
+      var total_value = 0;
+      for(var t_index = 0; t_index < 5; t_index++){
+          total_value += entity_values[t_index];
+      }
+      return total_value;
+    }
+
+    function get_LeftValue(){
+      return 100 - get_TotalValue();
+    }
+
+    $('document').ready(function(){
+      $( "#heading_display_options").draggable();
+
+      size = Math.min($(document).width(),$(document).height()-heightOffset);
+      $('#sunburst').css("margin-left",($(document).width()-size)/2);
+      $('#sunburst').css("width",size);
+
+      drawSunBurst('#sunburst',size);
+
+      $('#fullscreen_mode').click(function(){
+          fullScreen(document.URL);
+      })
+
+      $('#arrow').click(function(){
+        $('#main_options').toggle();
+        $(this).removeClass();
+        if(arrow_flag > 0){
+          $('#heading_display_options').css("height","26px");
+          $(this).addClass("arrow-down");
+        }else{
+          $('#heading_display_options').css("height","400px");
+          $(this).addClass("arrow-up");
+        }
+        arrow_flag = 1 - arrow_flag;
+      })
+
+      $('#LabelVisionCheckBox').click(function(){
+        entity_shows[0] = 1 - entity_shows[0];
+        if(entity_shows[0] == 0){
+          $('#LabelVisionValue').val(0);
+          prev_entity_values[0] = entity_values[0];
+          entity_values[0] = 0;
+        }else{
+          var leftValue = get_LeftValue();
+          var curValue = prev_entity_values[0];
+          if(curValue > leftValue){
+            curValue = leftValue;
+          }
+          entity_values[0] = curValue;
+          $('#LabelVisionValue').val(curValue);
+        }
+        drawSunBurst('#sunburst',size);
+      })
+
+      $('#PerspectiveCheckBox').click(function(){
+        entity_shows[1] = 1 - entity_shows[1];
+        if(entity_shows[1] == 0){
+          $('#PerspectiveValue').val(0);
+          prev_entity_values[1] = entity_values[1];
+          entity_values[1] = 0;
+        }else{
+          var leftValue = get_LeftValue();
+          var curValue = prev_entity_values[1];
+          if(curValue > leftValue){
+            curValue = leftValue;
+          }
+          entity_values[1] = curValue;
+          $('#PerspectiveValue').val(curValue);
+        }
+        drawSunBurst('#sunburst',size);
+      })
+
+      $('#ObjectivesCheckBox').click(function(){
+        entity_shows[2] = 1 - entity_shows[2];
+        if(entity_shows[2] == 0){
+          $('#ObjectivesValue').val(0);
+          prev_entity_values[2] = entity_values[2];
+          entity_values[2] = 0;
+        }else{
+          var leftValue = get_LeftValue();
+          var curValue = prev_entity_values[2];
+          if(curValue > leftValue){
+            curValue = leftValue;
+          }
+          entity_values[2] = curValue;
+          $('#ObjectivesValue').val(curValue);
+        }
+        drawSunBurst('#sunburst',size);
+      })
+
+      $('#BenefitsCheckBox').click(function(){
+        entity_shows[3] = 1 - entity_shows[3];
+        if(entity_shows[3] == 0){
+          $('#BenefitsValue').val(0);
+          prev_entity_values[3] = entity_values[3];
+          entity_values[3] = 0;
+        }else{
+          var leftValue = get_LeftValue();
+          var curValue = prev_entity_values[3];
+          if(curValue > leftValue){
+            curValue = leftValue;
+          }
+          entity_values[3] = curValue;
+          $('#BenefitsValue').val(curValue);
+        }
+        drawSunBurst('#sunburst',size);
+      })
+
+      $('#EnablersCheckBox').click(function(){
+        entity_shows[4] = 1 - entity_shows[4];
+        if(entity_shows[4] == 0){
+          $('#EnablersValue').val(0);
+          prev_entity_values[4] = entity_values[4];
+          entity_values[4] = 0;
+        }else{
+          var leftValue = get_LeftValue();
+          var curValue = prev_entity_values[4];
+          if(curValue > leftValue){
+            curValue = leftValue;
+          }
+          entity_values[4] = curValue;
+          $('#EnablersValue').val(curValue);
+        }
+        drawSunBurst('#sunburst',size);
+      })
+
+    });
+
+    $(window).resize(function(){
+      size = Math.min($(document).width(),$(document).height()-heightOffset);
+      drawSunBurst('#sunburst',size);
+      $('#sunburst').css("width",size);
+      $('#sunburst').css("margin-left",($(document).width()-size)/2);
+    })
+
+
+    var app = angular.module('sliderDemoApp', []);
+
+    app.controller('sliderDemoCtrl', function($scope, $log) {
+
+      $scope.a_LabelVisionValue = {
+        val:entity_values[0]
+      }
+
+      $scope.LabelVisionChange = function(){
+        if(entity_shows[0] > 0){
+          if($scope.a_LabelVisionValue.val >=0 && $scope.a_LabelVisionValue.val <=100){
+            var total_val = get_TotalValue();
+            total_val = total_val - entity_values[0] + $scope.a_LabelVisionValue.val;
+            if(total_val <= 100){
+              entity_values[0] = $scope.a_LabelVisionValue.val;
+              drawSunBurst('#sunburst',size);
+            }else{
+              $scope.a_LabelVisionValue.val = entity_values[0];
+            }
+          }
+        }else{
+          $scope.a_LabelVisionValue.val = entity_values[0];
+        }
+      }
+
+      $scope.a_PerspectiveValue = {
+        val:entity_values[1]
+      }
+
+      $scope.PerspectiveChange = function(){
+        if(entity_shows[1] > 0){
+          if($scope.a_PerspectiveValue.val >=0 && $scope.a_PerspectiveValue.val <=100){
+            var total_val = get_TotalValue();
+            total_val = total_val - entity_values[1] + $scope.a_PerspectiveValue.val;
+            if(total_val <= 100){
+              entity_values[1] = $scope.a_PerspectiveValue.val;
+              drawSunBurst('#sunburst',size);    
+            }else{
+              $scope.a_PerspectiveValue.val = entity_values[1];
+            }
+          }
+        }else{
+          $scope.a_PerspectiveValue.val = entity_values[1];
+        }
+      }
+
+      $scope.a_ObjectivesValue = {
+        val:entity_values[2]
+      }
+
+      $scope.ObjectivesChange = function(){
+        if(entity_shows[2] > 0){
+          if($scope.a_ObjectivesValue.val >=0 && $scope.a_ObjectivesValue.val <=100){
+            var total_val = get_TotalValue();
+            total_val = total_val - entity_values[2] + $scope.a_ObjectivesValue.val;
+            if(total_val <= 100){
+              entity_values[2] = $scope.a_ObjectivesValue.val;
+              drawSunBurst('#sunburst',size);
+            }else{
+              $scope.a_ObjectivesValue.val = entity_values[2];
+            }
+          }
+        }else{
+          $scope.a_ObjectivesValue.val = entity_values[2];
+        }
+      }
+
+      $scope.a_BenefitsValue = {
+        val:entity_values[3]
+      }
+
+      $scope.BenefitsChange = function(){
+        if(entity_shows[3] > 0){
+          if($scope.a_BenefitsValue.val >=0 && $scope.a_BenefitsValue.val <=100){
+            var total_val = get_TotalValue();
+            total_val = total_val - entity_values[3] + $scope.a_BenefitsValue.val;
+            if(total_val <= 100){
+              entity_values[3] = $scope.a_BenefitsValue.val;
+              drawSunBurst('#sunburst',size);
+            }else{
+              $scope.a_BenefitsValue.val = entity_values[3];
+            }
+          }
+        }else{
+          $scope.a_BenefitsValue.val = entity_values[3];
+        }
+      }
+
+      $scope.a_EnablersValue = {
+        val:entity_values[4]
+      }
+
+      $scope.EnablersChange = function(){
+        if(entity_shows[4] > 0){
+          if($scope.a_EnablersValue.val >=0 && $scope.a_EnablersValue.val <=100){
+            var total_val = get_TotalValue();
+            total_val = total_val - entity_values[4] + $scope.a_EnablersValue.val;
+            if(total_val <= 100){
+              entity_values[4] = $scope.a_EnablersValue.val;
+              drawSunBurst('#sunburst',size);
+            }else{
+              $scope.a_EnablersValue.val = entity_values[4];
+            }
+          }
+        }else{
+          $scope.a_EnablersValue.val = entity_values[4];
+        }
+      }
+
+    });
+    
+  </script>
+</html>

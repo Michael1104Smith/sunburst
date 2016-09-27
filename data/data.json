@@ -1,0 +1,232 @@
+{
+    "name": "vision",
+    "title": "bla bla",
+    "children": [
+        {
+            "name": "",
+            "size": 25,
+            "color": "#477626",
+            "id": "2",
+            "title": "1.Customer",
+            "type": "perspective",
+            "children": [
+                {
+                    "name": "",
+                    "size": 50,
+                    "id": "5",
+                    "title": "Challenge discrimination and stigma",
+                    "type": "SO",
+                    "children": [],
+                    "color": "#477626"
+                },
+                {
+                    "name": "",
+                    "size": 50,
+                    "id": "2",
+                    "title": "Focused on recovery",
+                    "type": "SO",
+                    "children": [],
+                    "color": "#477626"
+                }
+            ]
+        },
+        {
+            "name": "",
+            "size": 50,
+            "color": "#007481",
+            "id": "3",
+            "title": "2.Proposition",
+            "type": "perspective",
+            "children": [
+                {
+                    "name": "",
+                    "size": 100,
+                    "id": "1",
+                    "title": "High quality care",
+                    "type": "SO",
+                    "children": [
+                        {
+                            "name": "",
+                            "size": 100,
+                            "id": "2",
+                            "title": "Friends and Family Test",
+                            "type": "BT",
+                            "children": [
+                                {
+                                    "name": "",
+                                    "size": 100,
+                                    "id": "459",
+                                    "title": "#CareNotes iNurse App rollout",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#007481"
+                                }
+                            ],
+                            "color": "#007481"
+                        }
+                    ],
+                    "color": "#007481"
+                }
+            ]
+        },
+        {
+            "name": "",
+            "size": 100,
+            "color": "#722182",
+            "id": "4",
+            "title": "3.Capability",
+            "type": "perspective",
+            "children": [
+                {
+                    "name": "",
+                    "size": 50,
+                    "id": "4",
+                    "title": "Attract and retain talented people",
+                    "type": "SO",
+                    "children": [],
+                    "color": "#722182"
+                },
+                {
+                    "name": "",
+                    "size": 50,
+                    "id": "3",
+                    "title": "Recognised centre of excellence",
+                    "type": "SO",
+                    "children": [
+                        {
+                            "name": "",
+                            "size": 100,
+                            "id": "18",
+                            "title": "Delivers transformation from hospital to hub environment",
+                            "type": "BT",
+                            "children": [
+                                {
+                                    "name": "",
+                                    "size": 33.333333333333,
+                                    "id": "459",
+                                    "title": "#CareNotes iNurse App rollout",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#722182"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 33.333333333333,
+                                    "id": "281",
+                                    "title": "Design spaces and rooms within the clinic hub to adapt to multi uses",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#722182"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 33.333333333333,
+                                    "id": "82",
+                                    "title": "Torbay clinic hub ready (for handover to operations)",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#722182"
+                                }
+                            ],
+                            "color": "#722182"
+                        }
+                    ],
+                    "color": "#722182"
+                }
+            ]
+        },
+        {
+            "name": "",
+            "size": 33.333333333333,
+            "color": "#3f5364",
+            "id": "5",
+            "title": "4.Zinance",
+            "type": "perspective",
+            "children": [
+                {
+                    "name": "",
+                    "size": 100,
+                    "id": "6",
+                    "title": "An efficient, thriving and successful organisation",
+                    "type": "SO",
+                    "children": [
+                        {
+                            "name": "",
+                            "size": 50,
+                            "id": "1",
+                            "title": "Deliver key SMART Recovery outcomes",
+                            "type": "BT",
+                            "children": [
+                                {
+                                    "name": "",
+                                    "size": 16.666666666667,
+                                    "id": "459",
+                                    "title": "#CareNotes iNurse App rollout",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#3f5364"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 16.666666666667,
+                                    "id": "462",
+                                    "title": "#Cloud Storage for tablets",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#3f5364"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 16.666666666667,
+                                    "id": "105",
+                                    "title": "Activities carried out in different clinic hub rooms defined and agreed",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#3f5364"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 16.666666666667,
+                                    "id": "439",
+                                    "title": "Define operational requirements",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#3f5364"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 16.666666666667,
+                                    "id": "136",
+                                    "title": "Developing the Single Point of Access Model",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#3f5364"
+                                },
+                                {
+                                    "name": "",
+                                    "size": 16.666666666667,
+                                    "id": "330",
+                                    "title": "SIgn off for renovation plans that will enable the vision to be achieved",
+                                    "type": "EN",
+                                    "children": [],
+                                    "color": "#3f5364"
+                                }
+                            ],
+                            "color": "#3f5364"
+                        },
+                        {
+                            "name": "",
+                            "size": 16.666666666667,
+                            "id": "22",
+                            "title": "SMART Total Savings",
+                            "type": "BT",
+                            "children": [],
+                            "color": "#3f5364"
+                        }
+                    ],
+                    "color": "#3f5364"
+                }
+            ]
+        }
+    ]
+}

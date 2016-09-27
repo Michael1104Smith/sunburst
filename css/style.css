@@ -1,0 +1,95 @@
+path {
+  stroke: #fff;
+}
+
+.sliderExample {
+	padding: 1em;
+	background-color: #f5f5f5;
+	border: 1px solid #cecece;
+	margin: 1em;
+    border-radius: 7px;
+    float:left;
+}
+.Entities{
+	width: 200px;
+	height: 300px;
+}
+.Display_Options{
+	width: 100px;
+	height: 200px;
+}
+#heading_display_options{
+	position:absolute;
+	left:100px;
+	top:50px;    
+	width: 600px;
+    height: 400px;
+	border:1px solid #cecece;
+    border-radius: 5px;
+}
+
+#heading_display_options #header{
+	height:22px;
+	padding:2px;
+	padding-left:10px;
+	background-color: #155ba1;
+    border-radius: 2px;
+}
+
+#heading_display_options #header span{
+	color:white;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #f0f4f9;
+	float: right;
+    margin-top: 6px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #f0f4f9;
+	float: right;
+    margin-top: 6px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+.ui-slider-out-of-bounds {
+  position: absolute;
+  background-color: #EEE;
+  height: 100%;
+}
+
+.entities_div{
+	width:100%;
+	margin-top:30px;
+	float:left;
+}
+
+.entities_div input[type='check'],
+.entities_div span:nth-child(1){
+	float:left;
+}
+
+.entities_div .right_div{
+	float:right;
+}
+
+.entities_div input[type='number']{
+	width:40px;
+	text-align: center;
+}
+text{
+	font-size:8px;
+}
